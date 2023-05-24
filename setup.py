@@ -20,7 +20,7 @@ setup(
     long_description=README,
     long_description_content_type="text/markdown",
     install_requires=[
-        "protobuf>-4.21.6",
+        "protobuf>=4.21.6",
         "requests>=2.27.1",
         "pydantic>=1.9.0",
         "PyNaCl>=1.5.0",
