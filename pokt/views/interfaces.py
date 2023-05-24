@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Any, List, Iterator, Optional
+from typing import Any, List, Iterator, Optional, Tuple
 
 from ..rpc.models.validation import AllParams, ParamT, ParamValueT
 
@@ -41,7 +41,7 @@ class ProtocolParams(AllParams):
             stability_adjustment + participation_rate * (base_relays / 100) * app_stake
         )
 
-    def items(self) -> Iterator[tuple[str, List[ParamT]]]:
+    def items(self) -> Iterator[Tuple[str, List[ParamT]]]:
         for k in (
             self.app_params,
             self.node_params,

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import os
-from typing import TypedDict, Optional, Union, List
+from typing import TypedDict, Optional, Union, List, Tuple
 import pyarrow as pa
 
 from ..rpc.models.validation import BlockHeader, Transaction, HashRange
@@ -602,7 +602,7 @@ RecordT = Union[
 ]
 
 
-def flatten_tx_message(tx: Transaction) -> tuple[Optional[RecordT], str, str]:
+def flatten_tx_message(tx: Transaction) -> Tuple[Optional[RecordT], str, str]:
     if tx.stdTx.msg is None:
         return None, "Unknown", "Unknown"
     msg_type = tx.stdTx.msg.type_
