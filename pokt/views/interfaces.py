@@ -41,7 +41,7 @@ class ProtocolParams(AllParams):
             stability_adjustment + participation_rate * (base_relays / 100) * app_stake
         )
 
-    def items(self) -> Iterator[tuple[str, list[ParamT]]]:
+    def items(self) -> Iterator[tuple[str, List[ParamT]]]:
         for k in (
             self.app_params,
             self.node_params,
@@ -63,7 +63,7 @@ class SupportedChain:
     chainID: str
     name: str
     portal_prefix: str
-    aliases: Optional[list[str]] = None
+    aliases: Optional[List[str]] = None
 
     def __post_init__(self):
         if self.aliases:

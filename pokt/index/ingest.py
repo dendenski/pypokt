@@ -5,7 +5,7 @@ from collections import defaultdict
 import multiprocessing as mp
 import os
 import queue
-from typing import Union, Optional
+from typing import Union, Optional, List, Dict
 
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -37,9 +37,9 @@ def ingest_txs_by_block(
     session: Optional[Session] = None,
     page: int = 1,
     retries: int = 100,
-    txs: Optional[list[Transaction]] = None,
+    txs: Optional[List[Transaction]] = None,
     progress_queue: Optional[QueueT] = None,
-) -> list[Transaction]:
+) -> List[Transaction]:
     if txs is None:
         txs = []
     try:
@@ -127,7 +127,7 @@ def _block_headers_to_table(headers):
     record_dict = defaultdict(list)
     for header in headers:
         for k, v in header.items():
-            record_dict[k].append(v)
+            record_Dict[k].append(v)
     return pa.Table.from_pydict(record_dict).cast(block_header_schema)
 
 
@@ -135,7 +135,7 @@ def _txs_to_table(txs):
     record_dict = defaultdict(list)
     for tx in txs:
         for k, v in tx.items():
-            record_dict[k].append(v)
+            record_Dict[k].append(v)
     return pa.Table.from_pydict(record_dict).cast(tx_schema)
 
 
@@ -165,7 +165,7 @@ def _msgs_to_tables(msgs):
             record_dict = defaultdict(list)
             for msg in msgs:
                 for k, v in msg.items():
-                    record_dict[k].append(v)
+                    record_Dict[k].append(v)
             tables[module][type_] = pa.Table.from_pydict(record_dict).cast(
                 schema_for_msg(module, type_)
             )

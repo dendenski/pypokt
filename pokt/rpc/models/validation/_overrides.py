@@ -27,7 +27,7 @@ stdTx field.
 """
 from enum import Enum
 import json
-from typing import Any, List, Literal, Optional, Union
+from typing import Any, List, Literal, Optional, Union, Dict
 from typing_extensions import Annotated
 from pydantic import BaseModel, Field, conint, validator
 
@@ -144,7 +144,7 @@ class Upgrade(BaseModel):
     height: int = Field(..., alias="Height")
     version: str = Field(..., alias="Version")
     old_upgrade_height: int = Field(1, alias="OldUpgradeHeight")
-    features: Optional[list[str]] = Field(None, alias="Features")
+    features: Optional[List[str]] = Field(None, alias="Features")
 
 
 class UpgradeParamObject(ObjectParamValue):
@@ -456,7 +456,7 @@ class PublicKey(BaseModel):
 
 class MsgAppStakeVal(BaseModel):
     pubkey: Optional[PublicKey] = None
-    chains: Optional[list[str]] = None
+    chains: Optional[List[str]] = None
     value: Optional[int] = None
 
 
@@ -470,7 +470,7 @@ class MsgAppUnjailVal(BaseModel):
 
 class MsgValidatorStakeVal(BaseModel):
     public_key: Optional[PublicKey] = None
-    chains: Optional[list[str]] = None
+    chains: Optional[List[str]] = None
     value: Optional[int] = None
     service_url: Optional[str] = None
     output_address: Optional[str] = None
@@ -599,7 +599,7 @@ class HashRange(BaseModel):
 
 class MerkleProof(BaseModel):
     index: Optional[int] = None
-    hash_ranges: Optional[list[HashRange]] = None
+    hash_ranges: Optional[List[HashRange]] = None
     target_range: Optional[HashRange] = None
 
 
@@ -633,7 +633,7 @@ class RelayResponse(BaseModel):
 
 
 class ChallengeProofInvalidDataVal(BaseModel):
-    majority_responses: Optional[list[RelayResponse]] = None
+    majority_responses: Optional[List[RelayResponse]] = None
     minority_response: Optional[RelayResponse] = None
     reporters_address: Optional[str] = None
 
@@ -884,7 +884,7 @@ class QueryTXResponse(BaseModel):
 
 
 class QueryNodeClaimsResponse(BaseModel):
-    result: Optional[list[MsgClaimVal]] = None
+    result: Optional[List[MsgClaimVal]] = None
     page: int
     total_pages: int
 
@@ -965,7 +965,7 @@ class ApplicationParams(BaseModel):
 
 
 class ApplicationState(BaseModel):
-    applications: list[Application]
+    applications: List[Application]
     exported: bool
     params: ApplicationParams
 
@@ -980,7 +980,7 @@ class PubKey(BaseModel):
 
 class BaseAccountVal(BaseModel):
     address: str
-    coins: list[Coin]
+    coins: List[Coin]
     public_key: Optional[Union[str, PubKey]] = Field(None)
 
 
@@ -995,7 +995,7 @@ class ModuleAccountPermissions(str, Enum):
 class ModuleAccountVal(BaseModel):
     base_account: Optional[BaseAccountVal] = Field(None, alias="BaseAccount")
     name: Optional[str]
-    permissions: Optional[list[str]]  #
+    permissions: Optional[List[str]]  #
 
 
 class BaseAccount(BaseModel):
@@ -1053,14 +1053,14 @@ class SupplyItem(BaseModel):
 
 
 class AuthState(BaseModel):
-    accounts: list[Account]
+    accounts: List[Account]
     params: AuthParams
-    supply: list[SupplyItem]
+    supply: List[SupplyItem]
 
 
 class GovParams(BaseModel):
 
-    acl: list[ACLKey]
+    acl: List[ACLKey]
     dao_owner: str
     upgrade: Upgrade
 
@@ -1088,11 +1088,11 @@ class PocketCoreParams(BaseModel):
     proof_waiting_period: str
     replay_attack_burn_multiplier: str
     session_node_count: int
-    supported_blockchains: list[str]
+    supported_blockchains: List[str]
 
 
 class PocketCoreState(BaseModel):
-    claims: Optional[list[Claim]] = None
+    claims: Optional[List[Claim]] = None
     params: PocketCoreParams
 
 
@@ -1121,7 +1121,7 @@ class ValidatorPowers(BaseModel):
 
 class Validator(BaseModel):
     address: str
-    chains: list[str]
+    chains: List[str]
     jailed: bool
     output_address: str
     public_key: str
@@ -1157,13 +1157,13 @@ class SigningInfo(BaseModel):
 
 class PosState(BaseModel):
     exported: bool
-    missed_blocks: dict[str, Any]
+    missed_blocks: Dict[str, Any]
     params: PosParams
     prevState_total_power: str
-    prevState_validator_powers: list[ValidatorPowers]
+    prevState_validator_powers: List[ValidatorPowers]
     previous_proposer: str
-    signing_infos: dict[str, SigningInfo]
-    validators: list[Validator]
+    signing_infos: Dict[str, SigningInfo]
+    validators: List[Validator]
 
 
 class AppState(BaseModel):
@@ -1185,7 +1185,7 @@ class ConsensusEvidenceParams(BaseModel):
 
 
 class ConsensusValidatorParams(BaseModel):
-    pub_key_types: list[str]
+    pub_key_types: List[str]
 
 
 class ConsensusParams(BaseModel):

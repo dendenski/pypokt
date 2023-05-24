@@ -2,7 +2,7 @@ from contextlib import contextmanager
 import glob
 import os
 import threading
-from typing import Optional
+from typing import Optional, List
 
 import duckdb
 import pandas as pd
@@ -12,7 +12,7 @@ from .schema import table_dir_map
 
 class DuckDB:
     @staticmethod
-    def get_table_names(con) -> list[str]:
+    def get_table_names(con) -> List[str]:
         records = con.execute(
             "SELECT table_name FROM information_schema.tables"
         ).fetchall()
@@ -180,7 +180,7 @@ class DuckDB:
         with self._reader_cursor(config=config) as cur:
             yield cur
 
-    def table_names(self) -> list[str]:
+    def table_names(self) -> List[str]:
         with self.cursor() as cur:
             return DuckDB.get_table_names(cur)
 

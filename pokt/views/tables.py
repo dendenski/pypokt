@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, List
 
 from tabulate import tabulate
 
@@ -7,8 +7,8 @@ from .utils import chain_ids_to_details
 
 
 def _supported_chains_to_table_data(
-    supported_chains: list[SupportedChain],
-) -> list[tuple[str, str, str, str]]:
+    supported_chains: List[SupportedChain],
+) -> List[tuple[str, str, str, str]]:
     return [
         (
             chain.name,
@@ -21,7 +21,7 @@ def _supported_chains_to_table_data(
 
 
 def make_supported_chains_table(
-    supported_chains: Union[list[str], list[SupportedChain]], tablefmt="github"
+    supported_chains: Union[List[str], List[SupportedChain]], tablefmt="github"
 ) -> str:
     if not supported_chains:
         return ""

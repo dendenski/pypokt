@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import os
-from typing import TypedDict, Optional, Union
+from typing import TypedDict, Optional, Union, List
 import pyarrow as pa
 
 from ..rpc.models.validation import BlockHeader, Transaction, HashRange
@@ -231,7 +231,7 @@ class AppStakeMsgRecord(TypedDict):
     index: Optional[int]
     pubkey: Optional[str]
     pubkey_type: Optional[str]
-    chains: Optional[list[str]]
+    chains: Optional[List[str]]
     value: Optional[int]
 
 
@@ -320,7 +320,7 @@ class NodeStakeMsgRecord(TypedDict):
     index: Optional[int]
     public_key: Optional[str]
     public_key_type: Optional[str]
-    chains: Optional[list[str]]
+    chains: Optional[List[str]]
     value: Optional[int]
     service_url: Optional[str]
     output_address: Optional[str]
@@ -530,7 +530,7 @@ class RelayProofMsgRecord(TypedDict):
     target_merkle_hash: Optional[str]
     target_merkle_lower: Optional[str]
     target_merkle_upper: Optional[str]
-    hash_ranges: Optional[list[HashRangeItem]]
+    hash_ranges: Optional[List[HashRangeItem]]
     request_hash: Optional[str]
     entropy: Optional[int]
     session_block_height: Optional[int]

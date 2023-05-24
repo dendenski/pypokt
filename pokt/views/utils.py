@@ -1,5 +1,5 @@
 import re
-
+from typing import List
 from .interfaces import SupportedChain, SupportedChains
 
 _param_keys = [
@@ -104,5 +104,5 @@ def chain_id_from_name(name: str):
     return matches[0].chainID
 
 
-def chain_ids_to_details(supported_chains: list[str]):
+def chain_ids_to_details(supported_chains: List[str]):
     return [chain_details_from_id(chain) for chain in supported_chains]
